@@ -1,0 +1,39 @@
+<head>
+  <title>keys</title>
+  <link rel="icon" sizes="16x16 32x32" href="/mid.ico?v=2">
+</head>
+<body>
+  <center>
+    <p><i>Play along your computer keyboard, use &uarr; &darr; to transpose</i></p>
+  </center>
+  {{> hello}}
+</body>
+
+<template name="hello">
+    {{> piano}}
+  <center>
+  <div>
+  <select>
+    {{# each scales}}
+      {{> scale}}
+    {{/each}}
+  </select>
+  </div>
+  <div>
+  {{playing}}
+  </div>
+  </center>
+</template>
+<template name="scale">
+  <option value={{_id}}>{{scale}}</option>
+</template>
+<template name="piano">
+  <div id=piano class="center">
+    <div class="ebony">
+      {{#each ebony}}<span class="{{#if break}}break{{/if}}{{#if isSelected}}on{{/if}}{{#if isCol}}col{{/if}}"></span>{{/each}}
+    </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+    <div class="ivory">
+      {{#each ivory}}<span class="{{#if isSelected}}on{{/if}}{{#if isCol}}col{{/if}}"></span>{{/each}}   
+    </div>
+  </div>
+</template>
