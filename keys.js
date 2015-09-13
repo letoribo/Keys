@@ -1,13 +1,12 @@
 if (Meteor.isClient) {
   Meteor.startup(function() {
     steps = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent) ? _keys : keys;
-    $("<div>").appendTo("body").load("http://jazz-snippet.appspot.com/assets/_.jazz");
     Meteor.subscribe('scales');    
     Meteor.subscribe('keys');    
   }); 
 
   function message(x, y, z){
-    Jazz.MidiOut(x, y, z);
+    JZZ().openMidiOut().send([x, y, z])
   };
   function exe(some, x, y, z){
     some(x, y, z);
