@@ -24,7 +24,7 @@ if (Meteor.isClient) {
     if (e.keyCode == 38){
       Object.keys(steps[Session.get('current_scale')]).map(function(value, index){
         steps[Session.get('current_scale')][value] ++;
-        Keys = []; 
+        _Keys = []; 
       });
       highlight();
       exe(message, 0xb0, 120, 0);
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
     else if (e.keyCode == 40) {
       Object.keys(steps[Session.get('current_scale')]).map(function(value, index){
         steps[Session.get('current_scale')][value] --;
-        Keys = []; 
+        _Keys = []; 
       })
       highlight();
       exe(message, 0xb0, 120, 0);
@@ -50,7 +50,7 @@ if (Meteor.isClient) {
   document.onkeyup = function(e){ 
     keyAllowed [e.which] = true;
     var e = window.event || e;
-    if (!!Scales[Session.get('current_scale')]) var key = steps[Session.get('current_scale')][e.keyCode];
+    var key = steps[Session.get('current_scale')][e.keyCode];
     if(key){
   	   notes.splice(notes.indexOf(key),1);
   	   Session.set('playing', notes);
@@ -60,30 +60,22 @@ if (Meteor.isClient) {
 
   var highlight = function() {
     $.each(steps[Session.get('current_scale')], function(k, v) {
-      Keys.push(v);      
+      _Keys.push(v);      
     });
-    Session.set('Keys', Keys);
+    Session.set('Keys', _Keys);
   };
   
   Template.hello.helpers({
-    current_scale: function () {
-    	if (!!Scales[Session.get('current_scale')])
-      return Scales[Session.get('current_scale')];
-    },
     scales: function () {
-      return _Scales.find({});
+      return Scales.find({});
     }
   });
 
   Template.hello.events({
-    'click button': function () {
-      Session.set('current_scale', Session.get('current_scale') + 1);
-      $("select").val(Scales[Session.get('current_scale')]);
-    },
     'change select': function (e) {
     	var current_scale = parseInt($("select").val()) - 1;
       Session.set("current_scale", current_scale);
-      Keys = [];
+      _Keys = [];
       highlight();
       $('select').blur();
     }
@@ -91,10 +83,10 @@ if (Meteor.isClient) {
   
   Template.piano.helpers({
     ivory: function () {
-      return _Keys.find({notes: 'white'});
+      return Keys.find({notes: 'white'});
     },
     ebony: function () {
-      return _Keys.find({notes: 'black'});
+      return Keys.find({notes: 'black'});
     },
     break: function () {
       return this.id === '|';
