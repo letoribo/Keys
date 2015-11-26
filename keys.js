@@ -64,10 +64,17 @@ if (Meteor.isClient) {
     });
     Session.set('Keys', _Keys);
   };
-  
+
   Template.hello.helpers({
     scales: function () {
       return Scales.find({});
+    },
+    playing: function () {
+      return Session.get('playing');
+    },
+    color: function () {
+    	 var color = 'border-left: 3px solid #'+(Math.random() * 0xFFFFFF << 0).toString(16);
+      return color;
     }
   });
 
@@ -90,9 +97,6 @@ if (Meteor.isClient) {
     },
     break: function () {
       return this.id === '|';
-    },
-    playing: function () {
-      return Session.get('playing');
     },
     isSelected: function () {
       var notes = Session.get('playing');

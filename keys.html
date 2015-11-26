@@ -12,16 +12,22 @@
 <template name="hello">
     {{> piano}}
   <center>
-  <div>
-  <select>
-    {{# each scales}}
-      {{> scale}}
-    {{/each}}
-  </select>
-  </div>
-  <div>
-  {{playing}}
-  </div>
+    <div>
+      <ul id="panel">
+      {{#each playing}}
+        <li style={{color}}>
+          <strong>{{this}}</strong>
+        </li>
+      {{/each}}  
+      </ul>
+    </div>
+    <div>
+      <select>
+      {{# each scales}}
+        {{> scale}}
+      {{/each}}
+      </select>
+    </div>
   </center>
 </template>
 <template name="scale">

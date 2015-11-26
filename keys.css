@@ -56,3 +56,16 @@ div.ebony {
 }
 .ivory span.col, .ebony span.col { background-color: #5DA5AF;}
 .center {margin: 12%;}
+#panel {
+  font-size: 1.3em;
+  font-weight: 100;
+  color: #556270;
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+#panel li {
+  display: inline;
+  padding-left: 10px;
+  margin-right: 15px;
+}
