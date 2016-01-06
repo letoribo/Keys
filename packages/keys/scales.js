@@ -32,7 +32,7 @@ if (Meteor.isServer) {
         scale: scale
       });
     }
-    console.log('Initialized ' + Scales.find().count() + 'Scales');
+    console.log('Initialized', Scales.find().count(), 'Scales');
     
     keys = {
       b: [22,'|',25,27,'|',30,32,34,'|',37,39,'|',42,44,46,'|',49,51,'|',54,56,58,'|',61,63,'|',66,68,70,'|',73,75,'|',78,80,82,'|',85,87,'|',90,92,94,'|',97],
@@ -40,10 +40,11 @@ if (Meteor.isServer) {
     };  
     
     for (var key in keys.b) {
-      var b = keys.b[key]; console.log(b);
-
+      var b = keys.b[key];
+      var type = b == '|' ? 'break' : 'black';
+      console.log(type, b);
       Keys.insert({
-        notes: 'black',
+        notes: type,
         id: b
       });
     }

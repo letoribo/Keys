@@ -93,7 +93,7 @@ if (Meteor.isClient) {
       return Keys.find({notes: 'white'});
     },
     ebony: function () {
-      return Keys.find({notes: 'black'});
+      return Keys.find({notes: {$ne: 'white'}});
     },
     break: function () {
       return this.id === '|';
